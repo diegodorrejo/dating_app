@@ -1,0 +1,11 @@
+{{title}}
+
+<ul>
+  @for (item of users; track $index) {
+    <li>
+      {{item.id}} - {{item.userName}}
+    </li>
+  }
+</ul>
+
+<router-outlet />

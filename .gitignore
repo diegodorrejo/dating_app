@@ -484,3 +484,5 @@ $RECYCLE.BIN/
 *.swp
 .vscode/settings.json
 API/appsettings.json
+client/.vscode/extensions.json
+client/.vscode/extensions.json
