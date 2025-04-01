@@ -486,3 +486,4 @@ $RECYCLE.BIN/
 API/appsettings.json
 client/.vscode/extensions.json
 client/.vscode/extensions.json
+.vscode/launch.json
