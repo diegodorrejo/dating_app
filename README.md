@@ -10,5 +10,5 @@ Add this to your `appsettings.json`:
     "ApiKey": "your_api_key",
     "ApiSecret": "your_api_secret"
   },
-  "TokenKey": "The TokenKey must be more than 64 characters" 
+  "TokenKey": "The TokenKey must be >= 64 characters" 
 }
