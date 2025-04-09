@@ -3,6 +3,7 @@ using System.Text;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 [ApiController]
+[ServiceFilter(typeof(LogUserActivity))]
 [Route("api/[controller]")]
 public class AccountsController(DataContext context, ITokenService tokenService, IMapper mapper) : ControllerBase
 {
@@ -31,7 +33,8 @@ public class AccountsController(DataContext context, ITokenService tokenService,
         return new UserDTO{
             Username = user.UserName,
             Token = tokenService.CreateToken(user),
-            KnownAs = user.KnownAs
+            KnownAs = user.KnownAs,
+            Gender = user.Gender
         };
     }
 
@@ -56,7 +59,8 @@ public class AccountsController(DataContext context, ITokenService tokenService,
             Username = user.UserName,
             Token = tokenService.CreateToken(user),
             PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
-            KnownAs = user.KnownAs
+            KnownAs = user.KnownAs,
+            Gender = user.Gender
         };
     }
 
