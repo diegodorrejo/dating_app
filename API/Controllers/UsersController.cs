@@ -16,7 +16,7 @@ namespace API.Controllers;
 [Route("api/[controller]")]
 public class UsersController(IUserRepository userRepository, IMapper mapper, IPhotoService photoService): ControllerBase
 {
-    [AllowAnonymous]
+    
     [HttpGet]
     public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers([FromQuery] UserParams userParams){
         userParams.CurrentUsername = User.GetUsername();
@@ -25,7 +25,6 @@ public class UsersController(IUserRepository userRepository, IMapper mapper, IPh
         return Ok(users);
     }
 
-    [Authorize]
     [HttpGet("{username}")]
     public async Task<ActionResult<MemberDTO>> GetUser(string username){
         var user = await userRepository.GetMemberAsync(username);
