@@ -5,6 +5,7 @@ using API.Extensions;
 using API.Interfaces;
 using API.Middlewares;
 using API.Services;
+using API.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -18,13 +19,15 @@ builder.Services.AddIdentityServices(builder.Configuration);
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
-app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod()
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials()
     .WithOrigins("http://localhost:4200", "http://localhost:4200"));
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<PresenceHub>("hubs/presence");
+app.MapHub<MessageHub>("hubs/message");
 
 using var scope = app.Services.CreateScope();
 var service = scope.ServiceProvider;
